@@ -98,7 +98,7 @@ mysql_username = 'tu_usuario'
 mysql_password = 'tu_contraseña'
 mysql_host = '127.0.0.1'
 mysql_port = 3306
-bbdd_name = 'webscraper_db'
+bbdd_name = 'bbdd_midi'
 ```
 
 ### ↩️ Realizar migraciones
