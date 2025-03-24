@@ -20,11 +20,21 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from scraper import views
+from scraper.views import CustomLoginView, CustomLogoutView  # Importar las vistas de login y logout
 
 urlpatterns = [
+    # Admin URLs
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),  # Página de inicio
-    path('scraper/', include('scraper.urls')),  # URLs del scraper
+
+    # Página de inicio
+    path('', views.home, name='home'),
+
+    # URLs del scraper
+    path('scraper/', include('scraper.urls')),
+
+    # URLs de login y logout
+    path('login/', CustomLoginView.as_view(), name='login'),
+    path('logout/', CustomLogoutView.as_view(), name='logout'),
 ]
 
 # Servir archivos estáticos en desarrollo
