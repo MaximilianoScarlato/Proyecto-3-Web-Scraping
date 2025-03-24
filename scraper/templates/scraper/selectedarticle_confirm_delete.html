@@ -1,0 +1,13 @@
+{% extends "scraper/base.html" %}
+
+{% block title %}Eliminar Artículo{% endblock %}
+
+{% block content %}
+<h1 class="mb-4 text-danger">Eliminar Artículo</h1>
+<p>¿Estás seguro de que deseas eliminar el artículo <strong>{{ article.title }}</strong>?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sí, Eliminar</button>
+    <a href="{% url 'selected_article_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

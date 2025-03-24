@@ -1,0 +1,14 @@
+{% extends "scraper/base.html" %}
+
+{% block title %}Inicio - Web Scraper{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="mb-4">Bienvenido al Web Scraper</h1>
+    <p>Usa el menú para navegar por las secciones.</p>
+    <div class="d-flex justify-content-center">
+        <a href="{% url 'selected_article_list' %}" class="btn btn-primary mx-2">Artículos Seleccionados</a>
+        <a href="{% url 'duplicate_article_list' %}" class="btn btn-secondary mx-2">Artículos Duplicados</a>
+    </div>
+</div>
+{% endblock %}

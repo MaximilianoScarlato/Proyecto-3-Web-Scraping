@@ -1,0 +1,55 @@
+<!-- filepath: templates/scraper/search.html -->
+{% extends "scraper/base.html" %}
+
+{% block title %}Buscar Artículos{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Buscar Artículos</h1>
+<form method="get" action="{% url 'search_articles' %}">
+    <div class="mb-3">
+        <label for="query" class="form-label">Palabra clave</label>
+        <input type="text" id="query" name="query" class="form-control" placeholder="Ingrese la palabra clave" required>
+    </div>
+    <div class="mb-3">
+        <label for="limit" class="form-label">Cantidad de artículos</label>
+        <input type="number" id="limit" name="limit" class="form-control" placeholder="Ingrese la cantidad de artículos" min="1" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+{% if articles %}
+<h2 class="mt-5">Resultados de la Búsqueda</h2>
+<form method="post" action="{% url 'save_articles' %}">
+    {% csrf_token %}
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Seleccionar</th>
+                <th>Título</th>
+                <th>Autores</th>
+                <th>Revista</th>
+                <th>Fecha de Publicación</th>
+                <th>Seleccionar Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+            <tr>
+                <td>
+                    <input type="checkbox" name="selected_articles" value="{{ article.id }}">
+                </td>
+                <td>{{ article.title }}</td>
+                <td>{{ article.authors }}</td>
+                <td>{{ article.journal }}</td>
+                <td>{{ article.publication_date }}</td>
+                <td>
+                    <a href="{{ article.source_url }}" target="_blank" class="btn btn-info btn-sm">Ver Artículo</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-success">Guardar Seleccionados</button>
+</form>
+{% endif %}
+{% endblock %}

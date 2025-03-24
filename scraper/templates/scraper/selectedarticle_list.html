@@ -1,0 +1,33 @@
+{% extends "scraper/base.html" %}
+
+{% block title %}Artículos Seleccionados{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Artículos Seleccionados</h1>
+<a href="{% url 'selected_article_create' %}" class="btn btn-success mb-3">Crear Nuevo Artículo</a>
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Título</th>
+            <th>Autores</th>
+            <th>Revista</th>
+            <th>Fecha de Publicación</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in articles %}
+        <tr>
+            <td>{{ article.title }}</td>
+            <td>{{ article.authors }}</td>
+            <td>{{ article.journal }}</td>
+            <td>{{ article.publication_date }}</td>
+            <td>
+                <a href="{% url 'selected_article_update' article.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'selected_article_delete' article.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

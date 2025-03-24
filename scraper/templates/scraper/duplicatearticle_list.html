@@ -1,0 +1,32 @@
+<!-- filepath: templates/scraper/duplicatearticle_list.html -->
+{% extends "scraper/base.html" %}
+
+{% block title %}Artículos Duplicados{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Artículos Duplicados</h1>
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Título</th>
+            <th>Autores</th>
+            <th>Revista</th>
+            <th>Fecha de Publicación</th>
+            <th>Seleccionar Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in articles %}
+        <tr>
+            <td>{{ article.title }}</td>
+            <td>{{ article.authors }}</td>
+            <td>{{ article.journal }}</td>
+            <td>{{ article.publication_date }}</td>
+            <td>
+                <a href="{{ article.source_url }}" target="_blank" class="btn btn-info btn-sm">Ver Artículo</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
