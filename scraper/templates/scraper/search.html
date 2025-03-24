@@ -1,4 +1,4 @@
-<!-- filepath: templates/scraper/search.html -->
+<!-- filepath: c:\Users\admin\Desktop\Proyecto_3_Web_Scraping\scraper\templates\scraper\search.html -->
 {% extends "scraper/base.html" %}
 
 {% block title %}Buscar Artículos{% endblock %}
@@ -24,6 +24,7 @@
     <table class="table table-striped">
         <thead class="table-dark">
             <tr>
+                <th>#</th> <!-- Nueva columna para enumerar -->
                 <th>Seleccionar</th>
                 <th>Título</th>
                 <th>Autores</th>
@@ -35,6 +36,7 @@
         <tbody>
             {% for article in articles %}
             <tr>
+                <td>{{ forloop.counter }}</td> <!-- Enumerar los artículos -->
                 <td>
                     <input type="checkbox" name="selected_articles" value="{{ article.id }}">
                 </td>

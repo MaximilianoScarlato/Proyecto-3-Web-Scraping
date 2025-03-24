@@ -150,9 +150,58 @@ from pathlib import Path
 # Define BASE_DIR correctamente
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Configuración de archivos estáticos
+#Configuración de archivos estáticos
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",  # Carpeta estática dentro del proyecto
-    "C:/Users/admin/Desktop/proyectos 3-versionaes/webscraper_fusion_2/static",  # Ruta absoluta corregida
+    "C:/Users/admin\Desktop/PROYECTO_3_FABRICA/ZONA DE PRUEBA/webscraper_fusion_2/static",  # Ruta absoluta corregida
 ]
+
+# Configuraciones para redirigir a las vistas de login y logout
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+LOGIN_REDIRECT_URL = '/'  # Redirige al home después de iniciar sesión
+LOGOUT_REDIRECT_URL = '/login/'  # Redirige al login después de cerrar sesión
+
+# Configuración de Logs
+import os
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'INFO',  # Change to DEBUG for development
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'scraper.log'),
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',  # Change to DEBUG for development
+            'propagate': True,
+        },
+        'scraper': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',  # Adjust as needed
+            'propagate': False,
+        },
+    },
+}

@@ -1,3 +1,4 @@
+<!-- filepath: c:\Users\admin\Desktop\Proyecto_3_Web_Scraping\scraper\templates\scraper\home.html -->
 {% extends "scraper/base.html" %}
 
 {% block title %}Inicio - Web Scraper{% endblock %}
@@ -7,8 +8,12 @@
     <h1 class="mb-4">Bienvenido al Web Scraper</h1>
     <p>Usa el menú para navegar por las secciones.</p>
     <div class="d-flex justify-content-center">
+        <!-- Botón para Artículos Seleccionados -->
         <a href="{% url 'selected_article_list' %}" class="btn btn-primary mx-2">Artículos Seleccionados</a>
+        <!-- Botón para Artículos Duplicados -->
         <a href="{% url 'duplicate_article_list' %}" class="btn btn-secondary mx-2">Artículos Duplicados</a>
+        <!-- Nuevo botón para Buscar Artículos -->
+        <a href="{% url 'search_articles' %}" class="btn btn-success mx-2">Buscar Artículos</a>
     </div>
 </div>
 {% endblock %}

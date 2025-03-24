@@ -1,28 +1,40 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from .models import SelectedArticle, DuplicateArticle
 from .forms import SelectedArticleForm, DuplicateArticleForm
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
 import urllib.parse
 from datetime import datetime
 import re
 from django.db import IntegrityError
+import logging
+
+# Configurar el logger
+logger = logging.getLogger(__name__)
 
 # Vista para la página de inicio
+@login_required
 def home(request):
     return render(request, 'scraper/home.html')
 
 # SelectedArticle Views
+@login_required
 def selected_article_list(request):
     articles = SelectedArticle.objects.all()
+    # Enumerar los artículos
+    for index, article in enumerate(articles, start=1):
+        article.enumeration = index
     return render(request, 'scraper/selectedarticle_list.html', {'articles': articles})
 
+@login_required
 def selected_article_create(request):
     if request.method == 'POST':
         form = SelectedArticleForm(request.POST)
@@ -33,6 +45,7 @@ def selected_article_create(request):
         form = SelectedArticleForm()
     return render(request, 'scraper/selectedarticle_form.html', {'form': form})
 
+@login_required
 def selected_article_update(request, pk):
     article = get_object_or_404(SelectedArticle, pk=pk)
     if request.method == 'POST':
@@ -44,6 +57,7 @@ def selected_article_update(request, pk):
         form = SelectedArticleForm(instance=article)
     return render(request, 'scraper/selectedarticle_form.html', {'form': form})
 
+@login_required
 def selected_article_delete(request, pk):
     article = get_object_or_404(SelectedArticle, pk=pk)
     if request.method == 'POST':
@@ -52,11 +66,16 @@ def selected_article_delete(request, pk):
     return render(request, 'scraper/selectedarticle_confirm_delete.html', {'article': article})
 
 # DuplicateArticle Views
+@login_required
 def duplicate_article_list(request):
     articles = DuplicateArticle.objects.all()
+    # Enumerar los artículos
+    for index, article in enumerate(articles, start=1):
+        article.enumeration = index
     return render(request, 'scraper/duplicatearticle_list.html', {'articles': articles})
 
 # Search Articles
+@login_required
 def search_articles(request):
     query = request.GET.get('query', '')
     limit = int(request.GET.get('limit', 10))
@@ -80,9 +99,14 @@ def search_articles(request):
 
             while total_articles < limit:
                 driver.get(base_url + str(page))
-                WebDriverWait(driver, 20).until(
-                    EC.presence_of_all_elements_located((By.CSS_SELECTOR, "article.full-docsum"))
-                )
+                try:
+                    WebDriverWait(driver, 30).until(  # Incrementar el tiempo de espera a 30 segundos
+                        EC.presence_of_all_elements_located((By.CSS_SELECTOR, "article.full-docsum"))
+                    )
+                except TimeoutException:
+                    logger.error("TimeoutException: No se encontraron elementos en la página.")
+                    break
+
                 articles_on_page = driver.find_elements(By.CSS_SELECTOR, "article.full-docsum")
 
                 for article in articles_on_page:
@@ -98,7 +122,7 @@ def search_articles(request):
 
                         # Convertir la fecha a cadena para que sea serializable en JSON
                         articles.append({
-                            'id': len(articles) + 1,
+                            'id': len(articles) + 1,  # Enumerar los artículos
                             'title': title,
                             'authors': authors,
                             'citation': citation,
@@ -108,7 +132,7 @@ def search_articles(request):
                         })
                         total_articles += 1
                     except Exception as e:
-                        print(f"Error al procesar un artículo: {e}")
+                        logger.error(f"Error al procesar un artículo: {e}")
                 page += 1
         finally:
             driver.quit()
@@ -118,9 +142,8 @@ def search_articles(request):
 
     return render(request, 'scraper/search.html', {'articles': articles})
 
-
-
 # Save Articles
+@login_required
 def save_articles(request):
     if request.method == 'POST':
         selected_ids = request.POST.getlist('selected_articles')
@@ -154,3 +177,12 @@ def save_articles(request):
                     )
 
         return redirect('selected_article_list')
+
+# Vistas de Login y Logout
+from django.contrib.auth.views import LoginView, LogoutView
+
+class CustomLoginView(LoginView):
+    template_name = 'login.html'
+
+class CustomLogoutView(LogoutView):
+    template_name = 'logout_confirm.html'
