@@ -1,6 +1,3 @@
-Aquí tienes el archivo README.md actualizado con la sección de realización de pruebas y los comandos correspondientes:
-
-```markdown
 # Web Scraper Fusion
 
 ## 📌 Índice
