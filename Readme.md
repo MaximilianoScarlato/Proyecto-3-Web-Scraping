@@ -204,11 +204,4 @@ El comando `python manage.py test scraper.tests.test_commands` debe ejecutarse i
 El proyecto está en desarrollo. Se han implementado las funcionalidades principales, pero aún hay áreas que requieren mejoras y optimización.
 
 Si este proyecto te resulta útil, ¡marca el repositorio con una estrella en GitHub! ⭐
-```
 
-### **Cambios realizados:**
-1. Se agregó la sección **🧪 Realización de pruebas** con los comandos individuales y el comando run_tests.py.
-2. Se incluyó la nota sobre la ejecución individual de `test_commands` debido a la interacción con el usuario.
-3. Se configuraron correctamente los enlaces para que funcionen en GitHub.
-
-Este archivo está listo para ser copiado y pegado en Visual Studio Code. 😊
