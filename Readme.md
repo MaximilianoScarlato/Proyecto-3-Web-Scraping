@@ -20,7 +20,7 @@ El sistema incluye las siguientes funcionalidades:
 - Registro de artículos duplicados.
 - Acceso directo a los enlaces de los artículos.
 
-El proyecto sigue la metodología Scrum y está organizado en GitHub. Incluye pruebas unitarias para garantizar la confiabilidad del código.
+El proyecto sigue la metodología Scrum y está organizado en GitHub. Incluye pruebas unitarias e integrales para garantizar la confiabilidad del código.
 
 ## ⚡ Características principales
 - ✅ Búsqueda de artículos en PubMed utilizando Selenium.
