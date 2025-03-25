@@ -1,15 +1,15 @@
 # Web Scraper Fusion
 
 ## 📌 Índice
-- [📝 Sobre el Proyecto](#sobre-el-proyecto)
-- [⚡ Características principales](#características-principales)
-- [⛔ Temas actuales](#temas-actuales)
-- [🔧 Posibles mejoras](#posibles-mejoras)
-- [👨‍💻 Tecnologías utilizadas](#tecnologías-utilizadas)
-- [⚙ Instalación y uso](#instalación-y-uso)
-- [📂 Estructura de la carpeta](#estructura-de-la-carpeta)
-- [🧪 Realización de pruebas](#realización-de-pruebas)
-- [🌟 Estado del proyecto](#estado-del-proyecto)
+- [📝 Sobre el Proyecto](#-sobre-el-proyecto)
+- [⚡ Características principales](#-características-principales)
+- [⛔ Temas actuales](#-temas-actuales)
+- [🔧 Posibles mejoras](#-posibles-mejoras)
+- [👨‍💻 Tecnologías utilizadas](#-tecnologías-utilizadas)
+- [⚙ Instalación y uso](#-instalación-y-uso)
+- [📂 Estructura de la carpeta](#-estructura-de-la-carpeta)
+- [🧪 Realización de pruebas](#-realización-de-pruebas)
+- [🌟 Estado del proyecto](#-estado-del-proyecto)
 
 ## 📝 Sobre el Proyecto
 Web Scraper Fusion es un sistema backend desarrollado con Django y MySQL que permite realizar búsquedas en PubMed, guardar artículos seleccionados y gestionar artículos duplicados. El objetivo principal es facilitar la recopilación y organización de información científica.
