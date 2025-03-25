@@ -185,20 +185,17 @@ python manage.py test scraper.tests.test_views
 python manage.py test scraper.tests.test_commands
 ```
 
-Además, se ha generado un comando para ejecutar todas las pruebas excepto `test_commands` (que requiere interacción con el usuario):
+Además, se ha generado un comando a modo de prueba para ejecutar todas los tests, excepto `test_commands` (que requiere interacción con el usuario):
 
 ```bash
 python run_tests.py
 ```
 
-Este comando ejecuta:
-- `python manage.py test scraper.tests.test_admin`
-- `python manage.py test scraper.tests.test_forms`
-- `python manage.py test scraper.tests.test_models`
-- `python manage.py test scraper.tests.test_services`
-- `python manage.py test scraper.tests.test_views`
+Todos los comandos de testeo pueden llevarse a cabo con:
 
-El comando `python manage.py test scraper.tests.test_commands` debe ejecutarse individualmente debido a que requiere interacción con el usuario.
+```bash
+python manage.py test scraper/tests
+```
 
 ## 🌟 Estado del proyecto
 El proyecto está en desarrollo. Se han implementado las funcionalidades principales, pero aún hay áreas que requieren mejoras y optimización.
